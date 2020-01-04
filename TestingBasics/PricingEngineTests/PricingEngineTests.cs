@@ -7,50 +7,113 @@ namespace EngineTests
     public class PricingEngineTests
     {
         [TestMethod]
-        public void CalculateUnitPrice_Qty10()
+        public void CalculateUnitPrice_BelowMinPrice()
         {
-            // Test the discount for quantity = 10
             // arrange
             PricingEngine engine = new PricingEngine(false);
 
             // act
-            decimal unitPrice = engine.CalculateUnitPrice(10, 25.00m);
+            decimal unitPrice = engine.CalculateUnitPrice(20, 1.00m);
 
             // assert
-            Assert.AreEqual(22.50m, unitPrice);
+            Assert.AreEqual(1.00m, unitPrice);
+
         }
 
         [TestMethod]
-        public void CalculateUnitPrice_Qty20()
+        public void CalculateUnitPrice_MinPrice()
         {
-            // Test the discount for quantity = 20
             // arrange
             PricingEngine engine = new PricingEngine(false);
 
             // act
-            decimal unitPrice = engine.CalculateUnitPrice(20, 25.00m);
+            decimal unitPrice = engine.CalculateUnitPrice(20, 1.01m);
 
             // assert
-            Assert.AreEqual(20.00m, unitPrice);
+            Assert.AreEqual(0.909m, unitPrice);
+
         }
 
         [TestMethod]
-        public void CalculateUnitPrice_HolidayNoDiscount()
+        public void CalculateUnitPrice_BelowMinQty()
         {
-            // Test the discount for holiday and quantity = 10 but total
-            // discounted amount is below the holiday threshold
+            // arrange
+            PricingEngine engine = new PricingEngine(false);
+
+            // act
+            decimal unitPrice = engine.CalculateUnitPrice(10, 10.00m);
+
+            // assert
+            Assert.AreEqual(10.00m, unitPrice);
+        }
+
+        [TestMethod]
+        public void CalculateUnitPrice_MinQtyLower()
+        {
+            // arrange
+            PricingEngine engine = new PricingEngine(false);
+
+            // act
+            decimal unitPrice = engine.CalculateUnitPrice(11, 10.00m);
+
+            // assert
+            Assert.AreEqual(9.00m, unitPrice);
+        }
+
+        [TestMethod]
+        public void CalculateUnitPrice_MinQtyUpper()
+        {
+            // arrange
+            PricingEngine engine = new PricingEngine(false);
+
+            // act
+            decimal unitPrice = engine.CalculateUnitPrice(20, 10.00m);
+
+            // assert
+            Assert.AreEqual(9.00m, unitPrice);
+        }
+
+        [TestMethod]
+        public void CalculateUnitPrice_QtyGT20()
+        {
+            // arrange
+            PricingEngine engine = new PricingEngine(false);
+
+            // act
+            decimal unitPrice = engine.CalculateUnitPrice(21, 10.00m);
+
+            // assert
+            Assert.AreEqual(8.00m, unitPrice);
+        }
+
+        [TestMethod]
+        public void CalculateUnitPrice_HolidayBelowMinPrice()
+        {
             // arrange
             PricingEngine engine = new PricingEngine(true);
 
             // act
-            decimal unitPrice = engine.CalculateUnitPrice(10, 125.00m);
+            decimal unitPrice = engine.CalculateUnitPrice(10, 1.00m);
+
+            // assert
+            Assert.AreEqual(1.00m, unitPrice);
+        }
+
+        [TestMethod]
+        public void CalculateUnitPrice_HolidayBelowMinTotal()
+        {
+            // arrange
+            PricingEngine engine = new PricingEngine(true);
+
+            // act
+            decimal unitPrice = engine.CalculateUnitPrice(10, 100.00m);
 
             // assert
             Assert.AreEqual(100.00m, unitPrice);
         }
 
         [TestMethod]
-        public void CalculateUnitPrice_HolidayDiscount()
+        public void CalculateUnitPrice_HolidayBelowMinQty()
         {
             // Test the discount for holiday and quantity = 10 and total
             // discounted amount is above the holiday threshold
@@ -61,22 +124,22 @@ namespace EngineTests
             decimal unitPrice = engine.CalculateUnitPrice(10, 150.00m);
 
             // assert
-            Assert.AreEqual(120.00m, unitPrice);
+            Assert.AreEqual(135.00m, unitPrice);
         }
 
         [TestMethod]
-        public void CalculateUnitPrice_NoDiscount()
+        public void CalculateUnitPrice_HolidayMinQty()
         {
-            // Test the discount for quantity = 10
+            // Test the discount for holiday and quantity = 10 and total
+            // discounted amount is above the holiday threshold
             // arrange
-            PricingEngine engine = new PricingEngine(false);
+            PricingEngine engine = new PricingEngine(true);
 
             // act
-            decimal unitPrice = engine.CalculateUnitPrice(10, 1.00m);
+            decimal unitPrice = engine.CalculateUnitPrice(11, 150.00m);
 
             // assert
-            Assert.AreEqual(1.00m, unitPrice);
-
+            Assert.AreEqual(120.00m, unitPrice);
         }
     }
 }

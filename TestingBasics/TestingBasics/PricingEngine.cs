@@ -34,10 +34,10 @@ namespace TestingBasics
                     {
                         discountPercent = 0.20m;
                     }
-                }
-                else
-                {
-                    discountPercent = 0.10m;
+                    else
+                    {
+                        discountPercent = 0.10m;
+                    }
                 }
 
                 if (_holiday & (quantity * (retailPrice * (1.00m - discountPercent)) > _holidayDiscountAmount))
