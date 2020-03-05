@@ -12,7 +12,7 @@ namespace TestingBasics
             bool holiday = false;
 
             Console.WriteLine("Are you pricing for a holiday? [Y]es or [N]o");
-            string holidayAnswer = Console.ReadKey().ToString().ToUpper();
+            string holidayAnswer = Console.ReadKey().Key.ToString().ToUpper();
             if (holidayAnswer == "Y")
             {
                 holiday = true;
@@ -34,7 +34,7 @@ namespace TestingBasics
                 Console.WriteLine("The calculated unit price is $" + unitPrice);
 
                 Console.WriteLine("Price another product? [Y]es or [N]o");
-                string answer = Console.ReadKey().ToString().ToUpper();
+                string answer = Console.ReadKey().Key.ToString().ToUpper();
                 Console.WriteLine();
 
                 if (answer == "N")
