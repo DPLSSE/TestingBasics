@@ -46,7 +46,7 @@ namespace TestingBasics
                 }
             }
 
-            // apply the discounts and retunr the unit price
+            // apply the discounts and return the unit price
             return retailPrice * (1.00m - discountPercent);
         }
     }
