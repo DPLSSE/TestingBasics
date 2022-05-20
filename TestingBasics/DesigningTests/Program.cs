@@ -49,7 +49,7 @@ namespace DesigningTests
         }
     }
 
-    class Employee()
+    class Employee
     {
         private int _employeeId = 0;
         public bool IsFullTime = false;
