@@ -86,7 +86,9 @@ namespace EngineTests
             Assert.AreEqual(8.00m, unitPrice);
         }
 
-        [TestMethod]
+        #region Added Holiday Discount
+
+         [TestMethod]
         public void CalculateUnitPrice_HolidayBelowMinPrice()
         {
             // arrange
@@ -141,5 +143,7 @@ namespace EngineTests
             // assert
             Assert.AreEqual(120.00m, unitPrice);
         }
+
+        #endregion
     }
 }
