@@ -26,7 +26,7 @@ namespace TestingBasics
 
             decimal discountPercent = 0.00m;
 
-            if (retailPrice >= 1.00m)
+            if (retailPrice > 1.00m)
             {
                 if (quantity > 10)
                 {
@@ -40,7 +40,7 @@ namespace TestingBasics
                     }
                 }
 
-                if (_holiday & (quantity * (retailPrice * (1.00m - discountPercent)) > _holidayDiscountAmount))
+                if (_holiday && (quantity * (retailPrice * (1.00m - discountPercent)) > _holidayDiscountAmount))
                 {
                     discountPercent += _holidayDiscountPercent;
                 }

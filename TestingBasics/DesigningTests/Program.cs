@@ -3,19 +3,20 @@ using System.Collections.Generic;
 
 namespace DesigningTests
 {
-    class Program
+    internal class Program
     {
         private const int MaxBaseSalary = 0; 
         private static Dictionary<int, Employee> _employees = new Dictionary<int, Employee>();
-        
-        
-        static void Main(string[] args)
+
+
+        private static void Main(string[] args)
         {
             // Compute the employee bonus
             var result = ComputeEmployeeBonus(1);
+            Console.WriteLine(result);
         }
 
-        static int ComputeEmployeeBonus(int employeeId)
+        private static int ComputeEmployeeBonus(int employeeId)
         { 
             // Compute the total bonus for an employee
             
@@ -38,24 +39,24 @@ namespace DesigningTests
            return basicBonus + performanceBonus;
         }
 
-        static int ComputeBasicBonus(int employeeId)
+        private static int ComputeBasicBonus(int employeeId)
         {
             return 0;
         }
 
-        static int ComputePerformanceBonus(int employeeId, int basicBonus)
+        private static int ComputePerformanceBonus(int employeeId, int basicBonus)
         {
             return 0;
         }
     }
 
-    class Employee()
+    class Employee
     {
         private int _employeeId = 0;
         public bool IsFullTime = false;
         public bool IsPerformanceEligible = false;
         public int Salary = 0;
-        
+
         public Employee(int employeeId)
         {
             _employeeId = employeeId;
