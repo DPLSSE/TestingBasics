@@ -26,7 +26,7 @@ namespace TestingBasics
 
             decimal discountPercent = 0.00m;
 
-            if (retailPrice > 1.00m)
+            if (retailPrice >= 1.00m)
             {
                 if (quantity > 10)
                 {
